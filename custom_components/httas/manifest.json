@@ -3,6 +3,6 @@
     "name": "HTTP Tasmota",
     "documentation": "https://github.com/JiriKursky/httas/",
     "dependencies": [],
-    "codeowners": ["@omm],
+    "codeowners": ["@omm"],
     "requirements": []
   }
