@@ -1,8 +1,8 @@
     {
     "domain": "httas",
     "name": "HTTP Tasmota",
-    "documentation": "https://github.com/JiriKursky/httas/readme.MD",
+    "documentation": "https://github.com/JiriKursky/httas/",
     "dependencies": [],
-    "codeowners": [],
+    "codeowners": ["@omm],
     "requirements": []
   }
