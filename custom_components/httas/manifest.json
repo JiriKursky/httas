@@ -1,6 +1,6 @@
     {
     "domain": "httas",
-    "name": "HTTP Tasmota Sonoff",
+    "name": "HTTP Tasmota Sonoff without MQTT",
     "documentation": "https://github.com/JiriKursky/httas/",
     "dependencies": [],
     "codeowners": ["@omm"],
