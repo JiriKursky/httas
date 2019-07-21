@@ -6,7 +6,7 @@ Communication is via web request officially published [here](https://github.com/
 ![Sonoff](https://github.com/JiriKursky/Custom_components/blob/master/library/sonoffbasic.jpg)
 
 Installation: 
-1. Create sub-folder *httas* in folder *config/custom_components* and simply copy [files](https://github.com/JiriKursky/Custom_components/tree/master/httas)
+1. Via hacs just install
 2. Change your *configuration.yaml*.
 
 
