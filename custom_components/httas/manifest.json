@@ -1,7 +1,7 @@
     {
     "domain": "httas",
     "name": "HTTP Tasmota",
-    "documentation": "https://github.com/JiriKursky/Hass.io_CZ_SK_custom_components",
+    "documentation": "https://github.com/JiriKursky/httas/readme.MD",
     "dependencies": [],
     "codeowners": [],
     "requirements": []
