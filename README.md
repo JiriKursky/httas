@@ -5,10 +5,6 @@ Communication is via web request officially published [here](https://github.com/
 
 ![Sonoff](https://github.com/JiriKursky/Custom_components/blob/master/library/sonoffbasic.jpg)
 
-Installation: 
-1. Via hacs just install
-2. Change your *configuration.yaml*.
-
 
 in *configuration.yaml* section *switches*
 ```yaml
