@@ -155,7 +155,7 @@ class Sonoff(SwitchDevice):
             if not self._info_state_ok:
                 if self._notification:
                     self.hass.components.persistent_notification.create(
-                        "{} is ok. Scan interval is {} seconds now".format(self._ip_address, self._scan_interval),
+                        "{} ({}) is ok. Scan interval is {} seconds now".format(self._name, self._ip_address, self._scan_interval),
                         title=DOMAIN) 
                 self._info_state_ok = True                           
             if self._follow_device:
@@ -183,7 +183,7 @@ class Sonoff(SwitchDevice):
                 if not self._lost_informed:
                     if self._notification:
                         self.hass.components.persistent_notification.create(
-                            "{} has permanent error.<br/>Please fix device. Scan interval is {} seconds now".format(self._ip_address, scan_interval),                    
+                            "{} ({}) has permanent error.<br/>Please fix device. Scan interval is {} seconds now".format(self._name, self._ip_address, scan_interval),                    
                             title=DOMAIN)                
                     self._info_state_ok = False
                     self._lost_informed = True

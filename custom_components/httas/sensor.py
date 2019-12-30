@@ -35,6 +35,7 @@ S_ICON = 'ICON'
 
 ST_TEMPERATURE = 'temperature'
 ST_CURRENT = 'current'
+ST_POWER = 'power'
 ST_VOLTAGE = 'voltage'
 MAX_LOST = 5                        # Can be lost in commincation
 
@@ -60,6 +61,13 @@ SENSORS = {
         CONF_SCAN_INTERVAL: 5,
         S_UNIT: 'A',
         S_ICON: 'mdi:current-ac'
+    },
+    ST_POWER: {
+        S_CMND: CMND_STATUS,
+        S_VALUE:  ["StatusSNS", "ENERGY", "Power"] ,
+        CONF_SCAN_INTERVAL: 5,
+        S_UNIT: 'W',
+        S_ICON: 'mdi:power-plug'
     }
 }
 
@@ -160,7 +168,8 @@ class SonoffSensor(Entity):
         self._debug("update: {}".format(self._cmnd))        
         
         websession = async_get_clientsession(self.hass)                
-        value = None
+        value = 0
+        value_error = False
         try:
             with async_timeout.timeout(ASYNC_TIMEOUT):            
                 response = await websession.post(self._to_get(self._cmnd))                        
@@ -168,13 +177,14 @@ class SonoffSensor(Entity):
                 try:                
                     value = await response.json()            
                 except:            
-                    value = None
+                    value = 0
+                    value_error = True
         except:
             self._debug('except')
             
         self._debug("value: {}".format(value))                                             
             
-        if value is None:
+        if value_error:
             self._state = None
             scan_interval = 5
             self._is_available = False
@@ -184,7 +194,7 @@ class SonoffSensor(Entity):
                 if not self._lost_informed:
                     if self._notification:
                         self.hass.components.persistent_notification.create(
-                            "{} has permanent error.<br/>Please fix device. Scan interval is {} seconds now".format(self._ip_address, scan_interval),
+                            "{} ({}) has permanent error.<br/>Please fix device. Scan interval is {} seconds now".format(self._name, self.entity_id, scan_interval),
                             title=DOMAIN)                
                     self._info_state_ok = False
                     self._lost_informed = True
@@ -198,7 +208,7 @@ class SonoffSensor(Entity):
         if not self._info_state_ok:
             if self._notification:
                 self.hass.components.persistent_notification.create(
-                    "{} is ok. Scan interval is {} seconds now".format(self._ip_address, self._scan_interval),
+                    "{} ({}) is ok. Scan interval is {} seconds now".format(self._name, self.enity_id, self._scan_interval),
                     title=DOMAIN)      
             self._info_state_ok = True                                                     
         value = self._json_key_value(SENSORS[self._sensor_type][S_VALUE], value)                                            
